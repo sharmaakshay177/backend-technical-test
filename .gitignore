@@ -1,0 +1,7 @@
+project/target
+.bsp
+.idea
+target
+.DS_Store
+node_modules
+dist
