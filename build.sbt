@@ -15,6 +15,8 @@ val zioQuillVersion             = "4.4.1"
 val zioTestContainersVersion    = "0.8.0"
 val zioVersion                  = "2.0.2"
 val zioMetricsConnectorsVersion = "2.0.0-RC6"
+val scalaCheckVersion           = "1.16.0"
+val scalaTestVersion            = "3.2.13"
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
@@ -49,15 +51,21 @@ lazy val backend = (project in file("backend"))
       "dev.zio"               %% "zio-metrics-connectors"            % zioMetricsConnectorsVersion,
       "dev.zio"               %% "zio-test"                          % zioVersion % Test,
       "dev.zio"               %% "zio-test-sbt"                      % zioVersion % Test,
+      "dev.zio"               %% "zio-test-junit"                    % zioVersion % Test,
+      "dev.zio"               %% "zio-test-magnolia"                 % zioVersion % Test,
+      "dev.zio"               %% "zio-mock"                          % "1.0.0-RC9" % Test,
       "io.d11"                %% "zhttp"                             % zioHttpVersion,
       "io.getquill"           %% "quill-jdbc-zio"                    % zioQuillVersion,
       "org.postgresql"         % "postgresql"                        % postgresVersion,
       "org.flywaydb"           % "flyway-core"                       % flywayVersion,
       "io.github.scottweaver" %% "zio-2-0-testcontainers-postgresql" % zioTestContainersVersion,
-      "io.github.scottweaver" %% "zio-2-0-db-migration-aspect"       % zioTestContainersVersion,
-      "dev.zio"               %% "zio-logging-slf4j"                 % zioLoggingVersion,
-      "org.slf4j"              % "slf4j-api"                         % slf4jVersion,
-      "org.slf4j"              % "slf4j-simple"                      % slf4jVersion
+//      "io.github.scottweaver" %% "zio-2-0-db-migration-aspect"       % zioTestContainersVersion,
+      "dev.zio"        %% "zio-logging-slf4j" % zioLoggingVersion,
+      "org.slf4j"       % "slf4j-api"         % slf4jVersion,
+      "org.slf4j"       % "slf4j-simple"      % slf4jVersion,
+      "org.scalacheck" %% "scalacheck"        % scalaCheckVersion % Test,
+      "org.scalatest"  %% "scalatest"         % scalaTestVersion  % Test
+//      "com.dimafeng"          %% "testcontainers-scala-scalatest"    % zioTestContainersVersion % Test
     ),
     Test / fork := true,
     testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
